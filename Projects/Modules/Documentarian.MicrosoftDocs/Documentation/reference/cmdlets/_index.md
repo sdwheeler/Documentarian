@@ -6,8 +6,11 @@ description: >-
   Reference documentation for the module's cmdlets.
 ---
 
-### [ConvertTo-Contraction](ConvertTo-Contraction.md)
-Converts common word pairs to contractions in a Markdown document.
+### [Export-MonikerContent](Export-MonikerContent.md)
+Exports content from markdown files based on specified moniker conditions.
+
+### [Get-CmdletXref](Get-CmdletXref.md)
+Gets a cross-reference link for a command.
 
 ### [Get-HtmlMetaTags](Get-HtmlMetaTags.md)
 Gets all of the HTML `<meta>` elements of a web page.

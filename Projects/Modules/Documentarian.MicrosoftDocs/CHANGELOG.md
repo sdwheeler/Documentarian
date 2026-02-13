@@ -25,6 +25,10 @@ release_links:
 
 ## Unreleased
 
+- Added [`Export-MonikerContent`] to extract content matching a moniker from a markdown file.
+
+[`Export-MonikerContent`]: /modules/microsoftdocs/reference/cmdlets/export-monikercontent/
+
 - Added [`Get-CmdletXref`] to make it simpler to add links to cmdlet reference docs.
 
 [`Get-CmdletXref`]: /modules/microsoftdocs/reference/cmdlets/get-cmdletxref/
