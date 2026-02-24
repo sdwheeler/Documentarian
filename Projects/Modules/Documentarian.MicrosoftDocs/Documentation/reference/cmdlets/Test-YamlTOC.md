@@ -10,6 +10,7 @@ title: Test-YamlTOC
 # Test-YamlTOC
 
 ## SYNOPSIS
+
 Validates that all entries in the TOC exist and that all files in the repository are in the TOC.
 
 ## SYNTAX
@@ -20,34 +21,33 @@ Test-YamlTOC [-Path] <String> [<CommonParameters>]
 
 ## DESCRIPTION
 
-The cmdlet reads a `TOC.yml` file then verifies that every entry in the TOC exists in the
-repository. After that, the cmdlet enumerates every `.md` and `.yml` file in the repository and
-verifies that it exists in the TOC.
+The command recursively searches the path provided to find `TOC.yml` files. It reads the content of
+each `TOC.yml` file and resolves the full path for each entry in the TOC. The command then checks if
+the file exists in the repository.
+
+The path provided must be a folder.
 
 ## EXAMPLES
 
 ### Example 1 - Verify a TOC file
 
-In this example, the TOC contain site-relative URL links to docs in another repository. The first
-two items can be ignored. The next two items were files that were deleted. The links still worked
-because of redirection. However, it is best to remove or replace the entries with the proper path to
-avoid redirection.
+In this example, The first and third `toc.yml` items can also be ignored. The TOC contains
+site-relative URL links to docs in another repository. The second item is a file that exists but
+isn't in the TOC. The last item is a a false-positive result. The file doesn't exist but is in the
+TOC because it's a site-relative link to an external article.
 
 ```powershell
-Test-YamlTOC -Path .\docs-conceptual\toc.yml
+Test-YamlTOC -Path .\docs-conceptual
 ```
 
 ```Output
-File does not exist - /azure/automation/automation-dsc-getting-started
-File does not exist - /azure/governance/policy/concepts/guest-configuration
-File does not exist - dsc/tutorials/dscCiCd.md
-File does not exist - samples/repeating-a-task-for-multiple-objects--foreach-object-.md
-File not in TOC - developer/format/selectionsetname-element-for-entryselectedby-for-controls-for-configuration-format.md
-File not in TOC - developer/help/writing-windows-powershell-help.md
-File not in TOC - developer/scheduling-jobs-with-the-windows-powershell-api.md
+FileExists IsInTOC FileName
+---------- ------- --------
+      True   False D:\Git\PS-Docs\PowerShell-Docs\reference\docs-conceptual\developer\bread\toc.yml
+      True   False D:\Git\PS-Docs\PowerShell-Docs\reference\docs-conceptual\developer\scheduling-jobs-with-th…
+      True   False D:\Git\PS-Docs\PowerShell-Docs\reference\docs-conceptual\toc.yml
+     False    True D:\Git\PS-Docs\PowerShell-Docs\reference\docs-conceptual\powershell\utility-modules\platyp…
 ```
-
-The cmdlet also found three files that need to be added to the TOC.
 
 ## PARAMETERS
 
