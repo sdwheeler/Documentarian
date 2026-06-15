@@ -36,7 +36,7 @@ function Sync-BeyondCompare {
             if ($v -ne $version) {
                 $target = $startPath -replace [regex]::Escape($version), $v
                 if (Test-Path $target) {
-                    Start-Process -Wait "${env:ProgramFiles}\Beyond Compare 4\BComp.exe" -ArgumentList $startpath, $target
+                    Start-Process -Wait "${env:ProgramFiles}\Beyond Compare 5\BComp.exe" -ArgumentList $startpath, $target
                 }
             }
         }
