@@ -9,10 +9,19 @@ function Sync-BeyondCompare {
         [string]$Path
     )
 
+    if (Test-Path "${env:ProgramFiles}\Beyond Compare 5\BComp.exe") {
+        $bcomp = "${env:ProgramFiles}\Beyond Compare 5\BComp.exe"
+    } elseif (Test-Path "${env:ProgramFiles}\Beyond Compare 4\BComp.exe") {
+        $bcomp = "${env:ProgramFiles}\Beyond Compare 4\BComp.exe"
+    } else {
+        Write-Error 'Beyond Compare not found. Please install Beyond Compare and try again.'
+        return
+    }
+
     ### Get-GitStatus comes from the posh-git module.
     $gitStatus = Get-GitStatus
     if ($gitStatus) {
-        $reponame = $GitStatus.RepoName
+        $reponame = $gitStatus.RepoName
     } else {
         Write-Warning 'Not a git repo.'
         return
@@ -36,7 +45,7 @@ function Sync-BeyondCompare {
             if ($v -ne $version) {
                 $target = $startPath -replace [regex]::Escape($version), $v
                 if (Test-Path $target) {
-                    Start-Process -Wait "${env:ProgramFiles}\Beyond Compare 4\BComp.exe" -ArgumentList $startpath, $target
+                    Start-Process -Wait $bcomp -ArgumentList $startpath, $target
                 }
             }
         }
