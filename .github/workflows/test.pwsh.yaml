@@ -27,7 +27,7 @@ jobs:
           - Documentarian.Vale
     steps:
       - name: Checkout
-        uses: actions/checkout@v6
+        uses: actions/checkout@v7
       - name: Install PowerShell modules
         run: |
           Set-PSRepository PSGallery -InstallationPolicy Trusted
